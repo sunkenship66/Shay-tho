@@ -1,0 +1,22 @@
+// gid -> image. NOTE: gid 8 is item11 (the guide's table said item11, its code sample said item13).
+export const TILE_ASSETS = {
+  1: require('../../assets/images/furnitures/item2.png'),
+  2: require('../../assets/images/furnitures/item5.png'),
+  3: require('../../assets/images/furnitures/item6.png'),
+  4: require('../../assets/images/furnitures/item7.png'),
+  5: require('../../assets/images/furnitures/item8.png'),
+  6: require('../../assets/images/furnitures/item9.png'),
+  7: require('../../assets/images/furnitures/item10.png'),
+  8: require('../../assets/images/furnitures/item11.png'),
+  9: require('../../assets/images/furnitures/item12.png'),
+  10: require('../../assets/images/furnitures/item13.png'),
+  11: require('../../assets/images/furnitures/item17.png'),
+  12: require('../../assets/images/furnitures/item1.png'),
+  13: require('../../assets/images/furnitures/item4.png'),
+  14: require('../../assets/images/furnitures/item3.png'),
+  15: require('../../assets/images/furnitures/item14.png'),
+  16: require('../../assets/images/furnitures/item15.png'),
+  17: require('../../assets/images/furnitures/item16.png'),
+  18: require('../../assets/images/tiles/tile1.png'),
+  19: require('../../assets/images/tiles/tile2.png'),
+};
