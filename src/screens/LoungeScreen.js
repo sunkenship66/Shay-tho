@@ -17,7 +17,7 @@ import { getRandomSpawn } from '../utils/layerRules';
 
 export default function LoungeScreen() {
   const { user, profile, setCharacter, signOut } = useAuth();
-  const { others, bubbles, broadcastState, sendChat, clearBubble } = useLounge();
+  const { others, bubbles, debug, broadcastState, sendChat, clearBubble } = useLounge();
   const [modal, setModal] = useState(null); // 'message' | 'menu' | 'help' | null
 
   const othersList = useMemo(() => Object.values(others), [others]);
@@ -42,7 +42,10 @@ export default function LoungeScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
-      <Text style={styles.online}>Players online (besides you): {othersList.length}</Text>
+      <Text style={styles.online}>
+        v3 | others: {othersList.length} | ws: {debug.ws} | rx: {debug.rx}
+      </Text>
+      {debug.err ? <Text style={styles.error}>{debug.err}</Text> : null}
 
       <View style={styles.top}>
         <ResponsiveViewport>
@@ -99,6 +102,7 @@ export default function LoungeScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0a0a0f' },
   online: { color: '#f6e05e', textAlign: 'center', fontSize: 11, paddingVertical: 2 },
+  error: { color: '#fc8181', textAlign: 'center', fontSize: 10, paddingHorizontal: 8 },
   top: { height: '42%' },
   bottom: { flex: 1 },
 });
