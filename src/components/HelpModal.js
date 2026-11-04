@@ -1,11 +1,13 @@
 import React from 'react';
-import { Modal, View, Text, Pressable, StyleSheet, Platform } from 'react-native';
+import { Modal, View, Text, Pressable, ScrollView, StyleSheet, Platform } from 'react-native';
 import { PROXIMITY_RADIUS } from '../constants/gameConfig';
 
 const LINES = [
-  ['D-PAD', 'Walk around the lounge (hold to keep walking)'],
-  ['A', 'Open the message box and chat'],
-  ['B', 'Dismiss your speech bubble'],
+  ['D-PAD', 'Walk (hold to keep walking). Walk into a player to face them.'],
+  ['A', 'Chat: everyone within range sees it'],
+  ['B', 'Profile: friends, requests, synergy scores'],
+  ['C', 'Send a friend request to the player you are facing'],
+  ['D', 'Private message: only the player you are facing sees it'],
   ['L', 'Menu: change character, sign out'],
   ['R', 'This help screen'],
 ];
@@ -16,15 +18,18 @@ export default function HelpModal({ visible, onClose }) {
       <View style={styles.overlay}>
         <View style={styles.box}>
           <Text style={styles.title}>HELP</Text>
-          {LINES.map(([k, v]) => (
-            <View key={k} style={styles.line}>
-              <Text style={styles.key}>{k}</Text>
-              <Text style={styles.val}>{v}</Text>
-            </View>
-          ))}
-          <Text style={styles.note}>
-            You only hear messages from students within {PROXIMITY_RADIUS} tiles of you. Walk closer to join a conversation!
-          </Text>
+          <ScrollView>
+            {LINES.map(([k, v]) => (
+              <View key={k} style={styles.line}>
+                <Text style={styles.key}>{k}</Text>
+                <Text style={styles.val}>{v}</Text>
+              </View>
+            ))}
+            <Text style={styles.note}>
+              Public chat reaches players within {PROXIMITY_RADIUS} tiles. Every private message you and another player
+              exchange adds 1 to your synergy score, shown in your profile.
+            </Text>
+          </ScrollView>
           <Pressable style={styles.btn} onPress={onClose}><Text style={styles.btnText}>OK</Text></Pressable>
         </View>
       </View>
@@ -35,7 +40,7 @@ export default function HelpModal({ visible, onClose }) {
 const mono = Platform.select({ ios: 'Courier', default: 'monospace' });
 const styles = StyleSheet.create({
   overlay: { flex: 1, justifyContent: 'center', padding: 20, backgroundColor: 'rgba(0,0,0,0.7)' },
-  box: { backgroundColor: '#f7fafc', borderWidth: 4, borderColor: '#1a202c', borderRadius: 6, padding: 16 },
+  box: { maxHeight: '85%', backgroundColor: '#f7fafc', borderWidth: 4, borderColor: '#1a202c', borderRadius: 6, padding: 16 },
   title: { fontFamily: mono, fontWeight: 'bold', fontSize: 18, color: '#1a202c', marginBottom: 10 },
   line: { flexDirection: 'row', marginBottom: 6 },
   key: { width: 56, fontFamily: mono, fontWeight: 'bold', color: '#c53030' },

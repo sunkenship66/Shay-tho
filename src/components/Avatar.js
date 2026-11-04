@@ -9,6 +9,8 @@ export default function Avatar({
   position = { row: 1, col: 1 },
   direction = 'down',
   message = null,
+  privateMessage = null,
+  highlight = false,
   name = '',
   tileSize = 32,
 }) {
@@ -37,7 +39,12 @@ export default function Avatar({
         { top: position.row * tileSize, left: position.col * tileSize, width: tileSize, height: tileSize, zIndex: AVATAR_Z(position.row) },
       ]}
     >
-      {message ? <ChatBubble text={message} tileSize={tileSize} /> : null}
+      {highlight ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, styles.ring]} /> : null}
+      {privateMessage ? (
+        <ChatBubble text={privateMessage} tileSize={tileSize} variant="private" />
+      ) : message ? (
+        <ChatBubble text={message} tileSize={tileSize} />
+      ) : null}
       <Image source={sprites[frame]} resizeMode="contain" resizeMethod="scale" style={{ width: tileSize, height: tileSize }} />
       {name ? (
         <Text numberOfLines={1} style={[styles.name, { fontSize: Math.max(7, tileSize * 0.24), width: tileSize * 3, left: -tileSize }]}>
@@ -50,6 +57,7 @@ export default function Avatar({
 
 const styles = StyleSheet.create({
   container: { position: 'absolute', alignItems: 'center', justifyContent: 'center' },
+  ring: { borderWidth: 2, borderColor: '#f6e05e', borderRadius: 4 },
   name: {
     position: 'absolute', bottom: -2, textAlign: 'center', color: '#fff',
     textShadowColor: '#000', textShadowRadius: 2, textShadowOffset: { width: 1, height: 1 },

@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAuth } from '../context/AuthContext';
 import { LoungeProvider } from '../context/LoungeContext';
+import { SocialProvider } from '../context/SocialContext';
 import HomeScreen from '../screens/HomeScreen';
 import AvatarSelectScreen from '../screens/AvatarSelectScreen';
 import LoungeScreen from '../screens/LoungeScreen';
@@ -13,7 +14,9 @@ const Stack = createNativeStackNavigator();
 
 const LoungeRoute = () => (
   <LoungeProvider>
-    <LoungeScreen />
+    <SocialProvider>
+      <LoungeScreen />
+    </SocialProvider>
   </LoungeProvider>
 );
 
